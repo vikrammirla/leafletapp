@@ -11,5 +11,20 @@ make_map <- function(title = "This is a test", lat, lng){
   m <- leaflet::leaflet()
   m <- leaflet::addTiles(m)
   m <- leaflet::addMarkers(m, lng = as.numeric(lng), lat = as.numeric(lat), popup = title)
-  htmlwidgets::saveWidget(m, "mymap.html", selfcontained = FALSE)
+  #htmlwidgets::saveWidget(m, "mymap.html", selfcontained = FALSE)
+
+  library(networkD3)
+
+# Create fake data
+src <- c("A", "A", "A", "A",
+        "B", "B", "C", "C", "D")
+target <- c("B", "C", "D", "J",
+            "E", "F", "G", "H", "I")
+networkData <- data.frame(src, target)
+
+# Plot
+m<-simpleNetwork(networkData)
+htmlwidgets::saveWidget(m, "mymap.html", selfcontained = FALSE)
 }
+
+
